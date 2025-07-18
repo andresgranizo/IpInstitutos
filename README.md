@@ -39,13 +39,13 @@ CREATE TABLE institutos (
 Tabla de Sedes
 
 ```sql
-INSERT INTO sedes (codigo_sede, nombre_completo)
-VALUES
-('01H01566', 'INSTITUTO SUPERIOR TECNOLÓGICO DEL AZUAY - AZUAY'),
-('03H00866', 'UNIDAD EDUCATIVA VICENTE ANDA AGUIRRE - CAÑAR'),
-('03EX8E15', 'CONSULADO DEL ECUADOR EN SANTIAGO - CHILE - EXTRANJERO');
+CREATE TABLE sedes (
+    id SERIAL PRIMARY KEY,
+    codigo_sede VARCHAR(20) NOT NULL,
+    nombre_completo TEXT NOT NULL,
+    fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 ```
-
 ---
 
 ## 🚀 Pasos para ejecutar el proyecto localmente
