@@ -4,6 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Registrar Instituto</title>
+
+    <!-- Select2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+    <!-- jQuery y Select2 JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -15,14 +23,14 @@
             margin-top: 40px;
         }
 
-        input[type="text"] {
-            padding: 6px;
-            width: 300px;
-            text-transform: uppercase;
+        select {
+            width: 350px;
+            padding: 8px;
         }
 
         button {
-            padding: 6px 12px;
+            padding: 8px 16px;
+            margin-left: 10px;
         }
 
         .popup {
@@ -50,13 +58,29 @@
 <body>
     <h2>Registrar Instituto</h2>
     <form method="POST">
-        <label for="nombre">Nombre del Instituto:</label><br>
-        <input type="text" id="nombre" name="nombre" required>
+        <label for="instituto">Seleccione el Instituto:</label><br><br>
+        <select id="instituto" name="nombre" required>
+            <option value="">Buscar Instituto...</option>
+            <?php foreach ($institutos as $inst): ?>
+                <option value="<?= htmlspecialchars($inst['nombre_completo']) ?>">
+                    <?= htmlspecialchars($inst['nombre_completo']) ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
         <button type="submit">Registrar</button>
     </form>
 
-    <?php if (!empty($mensaje)): ?>
-        <div id="popup" class="popup">✅ <?= htmlspecialchars($mensaje) ?></div>
+    <?php if (isset($_GET['popup']) && $_GET['popup'] === 'ok'): ?>
+        <div id="popup" class="popup">✅ Instituto registrado correctamente.</div>
     <?php endif; ?>
+
+    <script>
+        $(document).ready(function() {
+            $('#instituto').select2({
+                placeholder: "Buscar Instituto...",
+                allowClear: true
+            });
+        });
+    </script>
 </body>
 </html>
